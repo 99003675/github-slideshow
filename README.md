@@ -61,3 +61,22 @@ public class Demo : MonoBehaviour {
       // Clean up any resources it is using.
       request.Dispose () ;
    }
+
+   IEnumerator GetImage (string url) {
+      UnityWebRequest request = UnityWebRequest.GetTexture (url) ;
+
+      yield return request.SendWebRequest() ;
+
+      if (request.isNetworkError || request.isHttpError) {
+         // error ...
+
+      } else {
+         //success...
+         uiRawImage.texture = ((DownloadHandlerTexture)request.downloadHandler).texture ;
+      }
+
+      // Clean up any resources it is using.
+      request.Dispose () ;
+   }
+
+}
